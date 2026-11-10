@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2026 AI 코스웨어 실증 수업 수강생 만족도 조사</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1b2430;--muted:#5b6673;--line:#dfe4ea;--bg:#f3f5f8;--card:#fff;--brand:#1f3864;--brand-2:#2e5aac;--accent:#e8eef9;--ok:#1e7f4f;--danger:#b3261e}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans KR",system-ui,-apple-system,"Malgun Gothic",sans-serif;font-size:15px;line-height:1.55}
+button,input,select,textarea{font:inherit;color:inherit}
+header.top{position:sticky;top:0;z-index:20;background:var(--brand);color:#fff;padding:12px 18px}
+header.top h1{font-size:16px;margin:0;font-weight:700}
+header.top .sub{font-size:12px;opacity:.85}
+.bar{height:5px;background:rgba(255,255,255,.25);border-radius:9px;margin-top:9px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:#9fc0ff;transition:width .25s}
+main{max-width:720px;margin:0 auto;padding:16px 14px 90px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px}
+.card h2{font-size:15px;margin:0 0 6px;display:flex;align-items:center;gap:8px}
+.card h2 .num{background:var(--brand);color:#fff;border-radius:999px;min-width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;font-size:12px}
+.hint{font-size:12.5px;color:var(--muted);margin:0 0 10px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.grid .full{grid-column:1/-1}
+@media (max-width:560px){.grid{grid-template-columns:1fr}}
+label.f{display:flex;flex-direction:column;gap:4px;font-size:12.5px;color:var(--muted)}
+label.f>input,label.f>select,textarea{border:1px solid var(--line);border-radius:8px;padding:9px 10px;font-size:15px;color:var(--ink);background:#fff;width:100%}
+textarea{min-height:84px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:2px solid #b9cdf3;border-color:var(--brand-2)}
+.req{color:var(--danger);font-size:11.5px}
+.info{background:var(--accent);border-radius:10px;padding:10px 12px;font-size:13px}
+.info b{color:var(--brand)}
+.q{padding:14px 0;border-top:1px solid var(--line)}
+.q:first-of-type{border-top:0}
+.q .t{font-weight:500;margin-bottom:8px}
+.q .t small{display:block;font-weight:400;color:var(--muted);font-size:12px}
+.q.miss .t{color:var(--danger)}
+.scale{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
+.scale.n11{grid-template-columns:repeat(11,1fr);gap:3px}
+.scale label{position:relative}
+.scale input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.scale span{display:flex;align-items:center;justify-content:center;height:40px;border:1px solid var(--line);border-radius:8px;background:#fafbfc;font-weight:500}
+.scale input:checked+span{background:var(--brand-2);border-color:var(--brand-2);color:#fff}
+.scale input:focus-visible+span{outline:2px solid #b9cdf3}
+.ends{display:flex;justify-content:space-between;font-size:11.5px;color:var(--muted);margin-top:4px}
+.na{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--muted);margin-top:8px}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chips label{position:relative}
+.chips input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.chips span{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:13px;background:#fafbfc}
+.chips input:checked+span{background:var(--accent);border-color:var(--brand-2);color:var(--brand);font-weight:500}
+.nav{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);padding:10px 14px;display:flex;gap:10px;justify-content:center;z-index:20}
+.nav .in{display:flex;gap:10px;width:100%;max-width:692px}
+.btn{border:1px solid var(--line);border-radius:10px;padding:11px 16px;background:#fff;color:var(--ink);cursor:pointer;font-weight:500}
+.btn.primary{background:var(--brand-2);border-color:var(--brand-2);color:#fff;flex:1}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.status{font-size:13px;min-height:18px;margin-top:6px}
+.status.err{color:var(--danger)}.status.ok{color:var(--ok)}
+.step{display:none}.step.on{display:block}
+.done{text-align:center;padding:36px 18px}
+.done h2{justify-content:center;font-size:19px;color:var(--brand)}
+.foot{text-align:center;font-size:11.5px;color:var(--muted);margin-top:18px}
+.mono{font-family:ui-monospace,Consolas,monospace;font-size:12px;word-break:break-all;background:#f4f6f9;border-radius:8px;padding:8px}
+#admin{display:none}
+</style>
+</head>
+<body>
+<header class="top">
+  <h1>2026 AI 코스웨어 실증 수업 수강생 만족도 조사</h1>
+  <div class="sub">고등교육 에듀테크 소프트랩 · 약 3분 · 무기명</div>
+  <div class="bar"><i id="bar"></i></div>
+</header>
+
+<main>
+<!-- 관리자: 교과목별 링크 생성 (#admin) -->
+<div class="card" id="admin">
+  <h2>사업단용 · 교과목별 설문 링크 만들기</h2>
+  <p class="hint">아래를 입력하면 해당 교과목 정보가 미리 채워진 링크가 만들어집니다. 교수님께 이 링크(또는 QR)를 전달하시면 학생은 교과목 정보를 입력하지 않아도 됩니다.</p>
+  <div class="grid">
+    <label class="f">대학<input id="a_univ"></label>
+    <label class="f">교과목명<input id="a_course"></label>
+    <label class="f">담당 교수<input id="a_prof"></label>
+    <label class="f">코스웨어(기업)<input id="a_cw"></label>
+    <label class="f full">Track<select id="a_track"><option>Track 1 신규 개발</option><option>Track 2 신규 심화</option><option>Track 2 기개발 심화</option><option>기타 에듀테크</option></select></label>
+  </div>
+  <p class="mono" id="a_out" style="margin-top:10px"></p>
+  <button class="btn" id="a_copy" type="button">링크 복사</button>
+</div>
+
+<form id="form" novalidate>
+<!-- STEP 1 -->
+<section class="step on" data-step="1">
+  <div class="card">
+    <h2>안녕하세요, 한림대학교 에듀테크소프트랩사업단입니다.</h2>
+    <p style="margin:6px 0 10px">이번 학기 AI 코스웨어(에듀테크)를 활용한 수업은 어떠셨나요? 여러분의 응답은 내년 수업과 제품을 개선하는 데 그대로 쓰입니다.</p>
+    <div class="info">
+      - 소요 시간: <b>약 3분</b> (선택형 19문항 + 선택 서술 2문항)<br>
+      - <b>이름·학번·연락처를 수집하지 않는 무기명 조사</b>이며, 응답은 통계 처리되어 사업 성과 분석과 제품 개선 목적으로만 활용됩니다.<br>
+      - 응답 내용은 성적과 전혀 관련이 없으며 담당 교수님께 개인별로 전달되지 않습니다.
+    </div>
+    <label style="display:flex;gap:8px;align-items:flex-start;margin-top:12px;font-size:14px"><input type="checkbox" id="agree" style="margin-top:4px"> <span>위 내용을 확인하였으며 조사 참여에 동의합니다. <span class="req">(필수)</span></span></label>
+  </div>
+
+  <div class="card">
+    <h2><span class="num">1</span>수강 교과목</h2>
+    <div id="courseFixed" class="info" style="display:none"></div>
+    <div id="courseInput" class="grid">
+      <label class="f">대학 <span class="req">(필수)</span><input id="univ" placeholder="예: 한림대학교"></label>
+      <label class="f">교과목명 <span class="req">(필수)</span><input id="course" placeholder="예: C프로그래밍"></label>
+      <label class="f">담당 교수<input id="prof" placeholder="성명(선택)"></label>
+      <label class="f">사용한 코스웨어·에듀테크<input id="cw" placeholder="제품명(선택)"></label>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="num">2</span>응답자 정보</h2>
+    <div class="q" data-key="grade"><div class="t">학년</div><div class="chips" data-radio="grade"></div></div>
+    <div class="q" data-key="major"><div class="t">전공 계열</div><div class="chips" data-radio="major"></div></div>
+    <div class="q" data-key="freq"><div class="t">이번 학기 코스웨어를 얼마나 자주 사용하셨나요?</div><div class="chips" data-radio="freq"></div></div>
+    <div class="q" data-key="prior"><div class="t">이전에도 AI 코스웨어를 활용한 수업을 들어본 적이 있나요?</div><div class="chips" data-radio="prior"></div></div>
+  </div>
+</section>
+
+<!-- STEP 2 -->
+<section class="step" data-step="2">
+  <div class="card">
+    <h2><span class="num">3</span>사용 경험</h2>
+    <p class="hint">1(전혀 그렇지 않다) ~ 7(매우 그렇다) 중 가장 가까운 숫자를 눌러 주세요.</p>
+    <div data-items="use"></div>
+  </div>
+  <div class="card">
+    <h2><span class="num">4</span>나에게 맞춘 학습(적응형 학습) 경험</h2>
+    <p class="hint">수업에서 해당 활동이 없었다면 「경험하지 않음」에 체크해 주세요.</p>
+    <div data-items="adapt"></div>
+  </div>
+</section>
+
+<!-- STEP 3 -->
+<section class="step" data-step="3">
+  <div class="card">
+    <h2><span class="num">5</span>학습 효과</h2>
+    <p class="hint">코스웨어를 사용하지 않는 일반 수업과 비교해서 답해 주세요.</p>
+    <div data-items="effect"></div>
+  </div>
+  <div class="card">
+    <h2><span class="num">6</span>지원 및 종합 만족</h2>
+    <div data-items="total"></div>
+    <div class="q" data-key="nps">
+      <div class="t">AI 코스웨어를 활용한 이 수업을 친구나 후배에게 추천하시겠습니까?</div>
+      <div class="scale n11" data-nps></div>
+      <div class="ends"><span>0 전혀 추천하지 않음</span><span>10 적극 추천</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- STEP 4 -->
+<section class="step" data-step="4">
+  <div class="card">
+    <h2><span class="num">7</span>개선 의견</h2>
+    <div class="q" data-key="tags"><div class="t">개선이 가장 필요하다고 느낀 부분을 모두 골라 주세요.<small>여러 개 선택 가능 · 없으면 「특별히 없음」</small></div><div class="chips" data-check="tags"></div></div>
+    <div class="q"><div class="t">코스웨어를 쓰면서 가장 도움이 되었던 기능이나 순간이 있다면 알려 주세요. <small>선택 · 한두 문장이면 충분합니다. 예: 틀린 문제를 AI가 다시 설명해 줘서 시험 전에 약점을 알 수 있었다</small></div><textarea id="best" maxlength="1000"></textarea></div>
+    <div class="q"><div class="t">불편했던 점이나 꼭 고쳐졌으면 하는 기능을 알려 주세요. <small>선택 · 해당 기업에 제품 개선 의견으로 전달됩니다</small></div><textarea id="improve" maxlength="1000"></textarea></div>
+  </div>
+  <div class="status" id="status"></div>
+</section>
+</form>
+
+<section class="card done" id="done" style="display:none">
+  <h2>응답이 제출되었습니다. 감사합니다!</h2>
+  <p>보내 주신 의견은 다음 학기 수업 설계와 코스웨어 개선에 반영하겠습니다.</p>
+</section>
+
+<div class="foot">한림대학교 에듀테크소프트랩사업단</div>
+</main>
+
+<div class="nav" id="nav"><div class="in">
+  <button class="btn" id="prev" type="button">이전</button>
+  <button class="btn primary" id="next" type="button">다음</button>
+</div></div>
+
+<script>
+/* ===== 설정: Apps Script 웹 앱 주소(배포 후 붙여넣기) ===== */
+const RECEIVER = "";
+const SURVEY_ID = "softlab-student-2026-2";
+
+const OPTS = {
+  grade:["1학년","2학년","3학년","4학년 이상","대학원·기타"],
+  major:["인문·사회","교육","경영·경제","자연과학","공학·IT","보건·의료","예체능","기타"],
+  freq:["거의 매주","2주에 1회 정도","한 달에 1회 정도","거의 사용하지 않음"],
+  prior:["처음이다","이전에도 있다"],
+  tags:["접속·속도·오류","화면 구성·사용 방법","학습 콘텐츠의 양과 질","AI 설명·피드백의 정확성","난이도가 내 수준과 맞지 않음","모바일 사용","수업·성적과의 연계","사용 안내 부족","특별히 없음"]
+};
+const ITEMS = {
+  use:[
+    ["q1","코스웨어의 사용 방법을 쉽게 익히고 쓸 수 있었다."],
+    ["q2","접속 지연이나 오류 없이 안정적으로 사용할 수 있었다."]],
+  adapt:[
+    ["q3","학기 초 사전(수준) 진단은 나의 현재 수준을 파악하는 데 도움이 되었다.",1],
+    ["q4","코스웨어는 나의 수준에 맞는 학습 내용이나 문제를 제공해 주었다.",1],
+    ["q5","코스웨어(AI) 또는 교수님이 준 개별 피드백은 부족한 부분을 보완하는 데 도움이 되었다.",1],
+    ["q6","사후 진단이나 학습 결과 확인을 통해 나의 실력이 나아진 것을 확인할 수 있었다.",1]],
+  effect:[
+    ["q7","수업 내용을 이해하는 데 도움이 되었다."],
+    ["q8","스스로 학습을 계획하고 점검하는 데 도움이 되었다."],
+    ["q9","수업에 대한 흥미와 참여가 높아졌다."],
+    ["q10","과제·시험 등 학업 성취를 높이는 데 도움이 되었다."]],
+  total:[
+    ["q11","교수님의 코스웨어 활용 안내와 지원은 충분했다."],
+    ["q12","AI 코스웨어를 활용한 이 수업에 전반적으로 만족한다."],
+    ["q13","앞으로도 AI 코스웨어를 활용하는 수업을 수강하고 싶다."]]
+};
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+
+/* ----- 렌더링 ----- */
+$$("[data-radio]").forEach(el=>{const k=el.dataset.radio;el.innerHTML=OPTS[k].map(o=>`<label><input type="radio" name="${k}" value="${o}"><span>${o}</span></label>`).join("")});
+$$("[data-check]").forEach(el=>{const k=el.dataset.check;el.innerHTML=OPTS[k].map(o=>`<label><input type="checkbox" name="${k}" value="${o}"><span>${o}</span></label>`).join("")});
+$$("[data-items]").forEach(el=>{el.innerHTML=ITEMS[el.dataset.items].map(([k,t,na])=>`
+  <div class="q" data-key="${k}"><div class="t">${t}</div>
+  <div class="scale">${[1,2,3,4,5,6,7].map(n=>`<label><input type="radio" name="${k}" value="${n}"><span>${n}</span></label>`).join("")}</div>
+  <div class="ends"><span>전혀 그렇지 않다</span><span>보통</span><span>매우 그렇다</span></div>
+  ${na?`<label class="na"><input type="checkbox" name="${k}_na"> 경험하지 않음(해당 활동 없음)</label>`:""}</div>`).join("")});
+$("[data-nps]").innerHTML=[...Array(11).keys()].map(n=>`<label><input type="radio" name="nps" value="${n}"><span>${n}</span></label>`).join("");
+document.addEventListener("change",e=>{
+  const n=e.target.name||"";
+  if(n.endsWith("_na")&&e.target.checked) $$(`input[name="${n.slice(0,-3)}"]`).forEach(r=>r.checked=false);
+  else if(/^q\d+$/.test(n)){const c=$(`input[name="${n}_na"]`);if(c)c.checked=false}
+  if(n==="tags"){const none=OPTS.tags[OPTS.tags.length-1];
+    if(e.target.value===none&&e.target.checked) $$('input[name="tags"]').forEach(c=>{if(c.value!==none)c.checked=false});
+    else if(e.target.checked){const c=$$('input[name="tags"]').find(c=>c.value===none);if(c)c.checked=false}}
+  const q=e.target.closest(".q");if(q)q.classList.remove("miss");
+});
+
+/* ----- 교과목 정보 미리 채움(링크 파라미터) ----- */
+let P={};try{P=Object.fromEntries(new URLSearchParams(location.search))}catch(_){}
+const pre={univ:P.univ||"",course:P.course||"",prof:P.prof||"",track:P.track||"",cw:P.cw||""};
+if(pre.univ&&pre.course){
+  $("#courseInput").style.display="none";const f=$("#courseFixed");f.style.display="block";
+  f.textContent=[pre.univ,pre.course,pre.prof&&pre.prof+" 교수님",pre.cw].filter(Boolean).join(" · ");
+}
+
+/* ----- 관리자 링크 생성 ----- */
+function adminToggle(){ $("#admin").style.display = location.hash==="#admin" ? "block":"none" }
+addEventListener("hashchange",adminToggle);adminToggle();
+function mkLink(){const q=new URLSearchParams({univ:$("#a_univ").value.trim(),course:$("#a_course").value.trim(),prof:$("#a_prof").value.trim(),cw:$("#a_cw").value.trim(),track:$("#a_track").value});
+  $("#a_out").textContent=location.origin+location.pathname+"?"+q.toString()}
+$$("#admin input,#admin select").forEach(i=>i.addEventListener("input",mkLink));mkLink();
+$("#a_copy").onclick=async()=>{try{await navigator.clipboard.writeText($("#a_out").textContent);$("#a_copy").textContent="복사되었습니다"}catch(_){$("#a_copy").textContent="직접 선택해 복사해 주세요"}};
+
+/* ----- 단계 이동·검증 ----- */
+let step=1;const LAST=4;
+const val=n=>{const r=$(`input[name="${n}"]:checked`);return r?r.value:""};
+function missing(s){
+  const miss=[];const sec=$(`.step[data-step="${s}"]`);
+  if(s===1){
+    if(!$("#agree").checked) miss.push($("#agree").closest(".card"));
+    if(!(pre.univ&&pre.course)){["univ","course"].forEach(id=>{if(!$("#"+id).value.trim())miss.push($("#"+id))})}
+  }
+  sec.querySelectorAll(".q[data-key]").forEach(q=>{const k=q.dataset.key;
+    const ok = k==="tags" ? $$('input[name="tags"]:checked').length>0 : (val(k)!=="" || ($(`input[name="${k}_na"]`)||{}).checked);
+    q.classList.toggle("miss",!ok); if(!ok) miss.push(q)});
+  return miss;
+}
+function show(){
+  $$(".step").forEach(s=>s.classList.toggle("on",+s.dataset.step===step));
+  $("#prev").style.visibility=step===1?"hidden":"visible";
+  $("#next").textContent=step===LAST?"제출하기":"다음";
+  $("#bar").style.width=((step-1)/LAST*100)+"%";scrollTo(0,0);
+}
+$("#prev").onclick=()=>{if(step>1){step--;show()}};
+$("#next").onclick=()=>{
+  const m=missing(step);
+  if(m.length){m[0].scrollIntoView({behavior:"smooth",block:"center"});
+    if(m[0].focus)m[0].focus(); setStatus(step===1&&!$("#agree").checked?"참여 동의에 체크해 주세요.":"응답하지 않은 문항이 있습니다.",1); return}
+  setStatus("");
+  if(step<LAST){step++;show()} else submit();
+};
+function setStatus(t,err){let s=$("#status");if(step!==LAST){s=$("#navmsg")||(()=>{const d=document.createElement("div");d.id="navmsg";d.className="status";$("main").appendChild(d);return d})()}
+  s.textContent=t;s.className="status"+(err?" err":t?" ok":"")}
+
+/* ----- 제출 ----- */
+function payload(){
+  const d={survey:SURVEY_ID,univ:pre.univ||$("#univ").value.trim(),course:pre.course||$("#course").value.trim(),prof:pre.prof||$("#prof").value.trim(),
+    track:pre.track,cw:pre.cw||$("#cw").value.trim(),grade:val("grade"),major:val("major"),freq:val("freq"),prior:val("prior"),nps:val("nps"),
+    tags:$$('input[name="tags"]:checked').map(c=>c.value).join("; "),best:$("#best").value.trim(),improve:$("#improve").value.trim(),
+    device:/Mobi|Android|iPhone/i.test(navigator.userAgent)?"모바일":"PC"};
+  for(let i=1;i<=13;i++) d["q"+i]=val("q"+i);
+  return d;
+}
+async function post(body){
+  for(let i=0;i<3;i++){
+    try{const r=await fetch(RECEIVER,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body});
+      const j=await r.json();if(j&&j.ok)return true;}catch(_){}
+    await new Promise(r=>setTimeout(r,800*(i+1)));
+  }
+  try{await fetch(RECEIVER,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body});return true}catch(_){return false}
+}
+async function submit(){
+  const btn=$("#next");
+  if(!RECEIVER){setStatus("미리보기 화면입니다. 응답 저장소가 아직 연결되지 않아 제출 내용은 저장되지 않습니다.",1);return}
+  btn.disabled=true;btn.textContent="제출 중…";setStatus("");
+  const ok=await post(JSON.stringify(payload()));
+  if(ok){try{localStorage.setItem(SURVEY_ID+"|"+(pre.course||$("#course").value.trim()),"1")}catch(_){}
+    $("#form").style.display="none";$("#nav").style.display="none";$("#done").style.display="block";$("#bar").style.width="100%";scrollTo(0,0)}
+  else{btn.disabled=false;btn.textContent="제출하기";setStatus("제출에 실패했습니다. 인터넷 연결을 확인하신 뒤 다시 눌러 주세요.",1)}
+}
+try{if(pre.course&&localStorage.getItem(SURVEY_ID+"|"+pre.course)){$("#form").style.display="none";$("#nav").style.display="none";$("#done").style.display="block";
+  $("#done h2").textContent="이미 응답을 제출하셨습니다. 감사합니다!"}}catch(_){}
+show();
+</script>
+</body>
+</html>
